@@ -1,3 +1,5 @@
+package main.java;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -7,9 +9,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("mainmenu-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/mainmenu-view.fxml"));
         Scene scene = new Scene(loader.load(), 1440, 1024);
-        stage.setTitle("Main Menu");
+        stage.setTitle("Main.Main Menu");
         stage.setScene(scene);
         stage.show();
     }
