@@ -8,7 +8,7 @@
 - Louraine Mae Javines
 
 ## Project Description
-Brief description of the system and the problem it solves.
+This platform bridges the gap between financial need and academic opportunity by providing a centralized hub for localized and categorized scholarships. Beyond its main role, the system aims to actively offer opportunities through providing scholarship funds sustained by donors and partnerships.
 
 ## Proposed Features
 - Registration
