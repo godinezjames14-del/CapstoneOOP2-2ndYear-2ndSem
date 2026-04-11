@@ -1,4 +1,4 @@
-#Scholarship System
+## Scholarship System
 
 ## Group Members
 - Henry Jamaes Godinez
