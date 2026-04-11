@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent; // CRITICAL: Must be this import
+import javafx.scene.input.MouseEvent; // This import is for mouse event mga dawg
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,11 +17,11 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Leave empty for now
+        //Wala patay plano diri mga dawg
     }
 
     @FXML
-    private void RegisterScreen(MouseEvent event) { // Use MouseEvent, not ActionEvent
+    private void RegisterScreen(MouseEvent event) { // always ta Use MouseEvent, and not ActionEvent
         try {
             // Load the FXML for the registration screen
             Parent registerRoot = FXMLLoader.load(getClass().getResource("/register-view.fxml"));
@@ -29,7 +29,7 @@ public class MainMenuController implements Initializable {
             // Get the current window (Stage)
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // Swap the scene
+            // Swap the scene // mura rag kotlin ni sir amparo mga guys HAHAHAH
             stage.setScene(new Scene(registerRoot));
             stage.show();
 
