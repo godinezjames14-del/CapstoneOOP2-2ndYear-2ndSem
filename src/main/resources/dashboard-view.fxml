@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Controllers.DashboardController">
+    <!-- TOP HEADER -->
+    <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="90.0" spacing="20.0" style="-fx-background-color: #800000; -fx-border-color: #FFD700; -fx-border-width: 0 0 5 0;" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Scholarsheesh" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="32.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets left="40.0" />
+                    </HBox.margin>
+                </Label>
+
+                <!-- SEARCH BAR AREA -->
+                <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                    <children>
+                        <TextField prefHeight="45.0" prefWidth="500.0" promptText="Search Scholarships, Deadlines, FAQs..." style="-fx-background-radius: 10;" />
+                    </children>
+                </HBox>
+
+                <!-- USER PROFILE AREA -->
+                <HBox alignment="CENTER_RIGHT" spacing="15.0">
+                    <children>
+                        <Label style="-fx-cursor: hand;" text="🔔" textFill="WHITE">
+                            <font><Font size="24.0" /></font>
+                        </Label>
+
+                        <!-- CIRCULAR PROFILE IMAGE -->
+                        <ImageView fx:id="profileImageView" fitHeight="55.0" fitWidth="55.0" pickOnBounds="true">
+<!--                            <image>-->
+<!--                                <Image url="@/images/default-avatar.png" />-->
+<!--                            </image>-->
+                            <clip>
+                                <Circle centerX="27.5" centerY="27.5" radius="27.5" />
+                            </clip>
+                        </ImageView>
+
+                        <Label fx:id="labelUserName" text="NAME" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="20.0" />
+                            </font>
+                        </Label>
+                    </children>
+                    <HBox.margin>
+                        <Insets right="50.0" />
+                    </HBox.margin>
+                </HBox>
+            </children>
+        </HBox>
+    </top>
+
+    <!-- LEFT SIDEBAR -->
+    <left>
+        <VBox prefWidth="270.0" spacing="25.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #E0E0E0; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Home" textFill="#5b6061">
+                    <font><Font size="24.0" /></font>
+                </Label>
+                <Label text="Application" textFill="#5b6061">
+                    <font><Font size="24.0" /></font>
+                </Label>
+                <Label text="Scholarship" textFill="#5b6061">
+                    <font><Font size="24.0" /></font>
+                </Label>
+                <Label text="Settings" textFill="#5b6061">
+                    <font><Font size="24.0" /></font>
+                </Label>
+            </children>
+            <padding>
+                <Insets left="40.0" top="40.0" />
+            </padding>
+        </VBox>
+    </left>
+
+    <!-- MAIN CONTENT AREA (EMPTY) -->
+    <center>
+        <VBox style="-fx-background-color: #F5F5F5;" BorderPane.alignment="CENTER" />
+    </center>
+</BorderPane>
