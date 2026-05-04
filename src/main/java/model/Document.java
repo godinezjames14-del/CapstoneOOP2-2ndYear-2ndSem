@@ -1,4 +1,4 @@
-package main.java.Entities;
+package main.java.model;
 
 import java.time.LocalDateTime;
 
@@ -27,7 +27,6 @@ public class Document {
 
     public void uploadDocument() {
         System.out.println("Uploading " + this.documentName + " for User ID: " + this.userId);
-        // Logic to save file to filePath would go here
     }
 
     public void deleteDocument() {

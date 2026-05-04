@@ -12,10 +12,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" stylesheets="@/css/background_login_and_register.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Controllers.MainMenuController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" stylesheets="@/css/background_login_and_register.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.MainMenuController">
     <children>
         <BorderPane VBox.vgrow="ALWAYS">
             <top>
@@ -63,10 +63,13 @@
 
                                 <VBox spacing="10.0">
                                     <children>
-                                        <TextField promptText="Username" style="-fx-background-radius: 12; -fx-padding: 14; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-color: #FAFAFA;" />
+                                        <!-- FIXED: Added fx:id="txtEmail" -->
+                                        <TextField fx:id="txtEmail" promptText="Username" style="-fx-background-radius: 12; -fx-padding: 14; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-color: #FAFAFA;" />
+
                                         <VBox spacing="5.0">
                                             <children>
-                                                <PasswordField promptText="Password" style="-fx-background-radius: 12; -fx-padding: 14; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-color: #FAFAFA;" />
+                                                <!-- FIXED: Added fx:id="txtPassword" -->
+                                                <PasswordField fx:id="txtPassword" promptText="Password" style="-fx-background-radius: 12; -fx-padding: 14; -fx-border-color: #E0E0E0; -fx-border-radius: 12; -fx-background-color: #FAFAFA;" />
                                                 <HBox alignment="CENTER_LEFT">
                                                     <children>
                                                         <Label style="-fx-cursor: hand;-fx-underline: true" text="Forgot your password?" textFill="#95a5a6">
@@ -79,7 +82,8 @@
                                     </children>
                                 </VBox>
 
-                                <Button prefWidth="400.0" style="-fx-background-color: #800000; -fx-background-radius: 12; -fx-cursor: hand;" text="Sign In" textFill="WHITE">
+                                <!-- FIXED: Added onMouseClicked="#handleLogin" -->
+                                <Button fx:id="loginSignin" onMouseClicked="#handleLogin" prefWidth="400.0" style="-fx-background-color: #800000; -fx-background-radius: 12; -fx-cursor: hand;" text="Sign In" textFill="WHITE">
                                     <font><Font name="System Bold" size="16.0" /></font>
                                     <padding><Insets bottom="14.0" top="14.0" /></padding>
                                     <effect><DropShadow color="#00000033" offsetY="4" radius="10" /></effect>
@@ -92,7 +96,8 @@
                                                 <Label text="New here?" textFill="#7f8c8d">
                                                     <font><Font size="14.0" /></font>
                                                 </Label>
-                                                <Label fx:id="labelRegister" onMouseClicked="#RegisterScreen" style="-fx-cursor: hand; -fx-underline: true;" text="Sign Up" textFill="#800000">
+                                                <!-- FIXED: onMouseClicked="#RegisterScreen" -->
+                                                <Label fx:id="labelRegister" onMouseClicked="#RegisterScreen" style="-fx-cursor: hand; -fx-underline: true;" text="Register now" textFill="#800000">
                                                     <font><Font name="System Bold" size="14.0" /></font>
                                                 </Label>
                                             </children>
