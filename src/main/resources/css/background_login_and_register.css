@@ -1,0 +1,9 @@
+.right-panel-image {
+    -fx-background-image: url("../images/scholarship.jpg");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+
+    -fx-background-color: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4));
+    -fx-background-blend-mode: multiply;
+}
