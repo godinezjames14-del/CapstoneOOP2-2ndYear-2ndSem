@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.DashboardController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.DashboardController">
 
     <!-- HEADER -->
     <top>
@@ -58,7 +58,16 @@
                     <padding><Insets left="20.0" /></padding>
                 </Button>
 
+                <Button fx:id="btnProfile" onMouseClicked="#showProfile" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="👤 My Profile" textFill="#495057">
+                    <font><Font size="16.0" /></font>
+                    <padding><Insets left="20.0" /></padding>
+                </Button>
+
+                <!-- This region pushes the Logout button to the bottom -->
+                <Region VBox.vgrow="ALWAYS" />
+
                 <Separator prefWidth="200.0" />
+
                 <Button onMouseClicked="#handleLogout" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="🚪 Log Out" textFill="#e74c3c">
                     <font><Font name="System Bold" size="16.0" /></font>
                     <padding><Insets left="20.0" /></padding>
@@ -68,12 +77,18 @@
         </VBox>
     </left>
 
-    <!-- CENTER AREA (Placeholder) -->
+    <!-- CENTER AREA -->
     <center>
-        <StackPane style="-fx-background-color: #F8F9FA;">
-            <children>
-                <Label text="Select a tab to begin" textFill="#bdc3c7"><font><Font size="20.0" /></font></Label>
-            </children>
-        </StackPane>
+        <ScrollPane fitToHeight="true" fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #F8F9FA; -fx-border-color: transparent;">
+            <content>
+                <StackPane>
+                    <children>
+                        <Label text="Select a tab to begin" textFill="#bdc3c7">
+                            <font><Font size="20.0" /></font>
+                        </Label>
+                    </children>
+                </StackPane>
+            </content>
+        </ScrollPane>
     </center>
 </BorderPane>

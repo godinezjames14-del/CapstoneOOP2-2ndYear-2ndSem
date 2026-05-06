@@ -19,12 +19,11 @@ import java.sql.*;
 
 public class MainMenuController {
 
-    @FXML private TextField txtEmail; // Linked via fx:id
-    @FXML private PasswordField txtPassword; // Linked via fx:id
+    @FXML private TextField txtEmail;
+    @FXML private PasswordField txtPassword;
 
     @FXML
     private void handleLogin(MouseEvent event) {
-        // Authenticate using DB data: henry@email.com / henry123
         User user = authenticate(txtEmail.getText(), txtPassword.getText());
 
         if (user != null) {
@@ -61,7 +60,7 @@ public class MainMenuController {
 
             DashboardController dashboard = loader.getController();
             if (dashboard != null) {
-                dashboard.setUserData(user.getName());
+                dashboard.setUserData(user.getName(), user.getUserID(), user.getRole());
             }
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
