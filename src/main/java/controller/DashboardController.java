@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.Node;
@@ -19,11 +20,22 @@ public class DashboardController {
     @FXML private BorderPane mainPane;
     @FXML private Button btnDashboard;
     @FXML private Button btnScholarships;
+    @FXML private Button btnProfile;
+
+    private int currentUserID;
+    private String currentUserRole;
 
     @FXML
     public void initialize() {
-        // Load the dashboard stats view into the center by default
         loadView("/home-stats-view.fxml");
+    }
+
+    public void setUserData(String name, int userID, String role) {
+        this.currentUserID = userID;
+        this.currentUserRole = role;
+        if (name != null && !name.isEmpty()) {
+            labelUserName.setText(name.toUpperCase());
+        }
     }
 
     public void setUserData(String name) {
@@ -35,18 +47,60 @@ public class DashboardController {
     @FXML
     private void showHome(MouseEvent event) {
         loadView("/home-stats-view.fxml");
-        updateButtonStyles(btnDashboard, btnScholarships);
+        updateButtonStyles(btnDashboard, btnScholarships, btnProfile);
     }
 
     @FXML
     private void showScholarshipList(MouseEvent event) {
         loadView("/scholarship-list-view.fxml");
-        updateButtonStyles(btnScholarships, btnDashboard);
+        updateButtonStyles(btnScholarships, btnDashboard, btnProfile);
     }
 
-    private void updateButtonStyles(Button active, Button inactive) {
+    @FXML
+    private void showProfile(MouseEvent event) {
+        try {
+            String fxmlPath = "SPONSOR".equalsIgnoreCase(currentUserRole)
+                    ? "/sponsor-profile-view.fxml"
+                    : "/student-profile-view.fxml";
+
+            URL loc = getClass().getResource(fxmlPath);
+            if (loc == null) {
+                System.err.println("Profile FXML not found: " + fxmlPath);
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(loc);
+            Parent view = loader.load();
+
+            if ("SPONSOR".equalsIgnoreCase(currentUserRole)) {
+                SponsorProfileController ctrl = loader.getController();
+                ctrl.setUserID(currentUserID);
+            } else {
+                StudentProfileController ctrl = loader.getController();
+                ctrl.setUserID(currentUserID);
+            }
+
+            if (view instanceof ScrollPane sp) {
+                sp.setFitToWidth(true);
+                sp.setFitToHeight(false);
+            }
+
+            BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
+            mainPane.setCenter(view);
+            updateButtonStyles(btnProfile, btnDashboard, btnScholarships);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateButtonStyles(Button active, Button... inactive) {
         active.setStyle("-fx-background-color: #800000; -fx-background-radius: 10; -fx-text-fill: white; -fx-cursor: hand;");
-        inactive.setStyle("-fx-background-color: transparent; -fx-text-fill: #495057; -fx-cursor: hand;");
+        for (Button b : inactive) {
+            if (b != null) {
+                b.setStyle("-fx-background-color: transparent; -fx-text-fill: #495057; -fx-cursor: hand;");
+            }
+        }
     }
 
     private void loadView(String fxmlPath) {
@@ -56,9 +110,16 @@ public class DashboardController {
                 System.err.println("Resource not found: " + fxmlPath);
                 return;
             }
-            // Standard loading without passing 'this' as controller
             Parent view = FXMLLoader.load(loc);
+
+            if (view instanceof ScrollPane sp) {
+                sp.setFitToWidth(true);
+                sp.setFitToHeight(false);
+            }
+
+            BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
             mainPane.setCenter(view);
+
         } catch (IOException e) {
             e.printStackTrace();
         }

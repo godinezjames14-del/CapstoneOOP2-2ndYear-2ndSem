@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #F8F9FA;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.StudentProfileController">
+    <content>
+        <VBox spacing="30.0" style="-fx-padding: 40;">
+            <children>
+
+                <!-- PAGE TITLE -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="My Profile" textFill="#212529">
+                            <font><Font name="System Bold" size="32.0" /></font>
+                        </Label>
+                        <Label text="View and manage your personal information." textFill="#6C757D">
+                            <font><Font size="16.0" /></font>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <!-- PROFILE CARD -->
+                <HBox alignment="CENTER_LEFT" spacing="30.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 15;">
+                    <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                    <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+                    <children>
+
+                        <!-- AVATAR -->
+                        <VBox alignment="CENTER" spacing="12.0">
+                            <children>
+                                <StackPane prefWidth="100.0" prefHeight="100.0">
+                                    <children>
+                                        <Circle fill="#800000" radius="50.0" stroke="#FFD700" strokeWidth="3.0" />
+                                        <Label fx:id="lblAvatarInitials" text="??" textFill="WHITE">
+                                            <font><Font name="System Bold" size="28.0" /></font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                                <Label style="-fx-background-color: #800000; -fx-background-radius: 20; -fx-padding: 4 14 4 14;" text="STUDENT" textFill="WHITE">
+                                    <font><Font name="System Bold" size="11.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <Separator orientation="VERTICAL" prefHeight="100.0" style="-fx-opacity: 0.4;" />
+
+                        <!-- NAME & ID -->
+                        <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label fx:id="lblFullName" text="Loading..." textFill="#212529">
+                                    <font><Font name="System Bold" size="26.0" /></font>
+                                </Label>
+                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                    <children>
+                                        <Label text="User ID:" textFill="#6C757D"><font><Font size="13.0" /></font></Label>
+                                        <Label fx:id="lblUserID" text="—" textFill="#800000"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="8.0">
+                                    <children>
+                                        <Label text="LRN:" textFill="#6C757D"><font><Font size="13.0" /></font></Label>
+                                        <Label fx:id="lblLRN" text="—" textFill="#495057"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- STATS CONTAINERS: Applications, Pending, Approved -->
+                <HBox spacing="20.0">
+                    <children>
+
+                        <!-- Applications -->
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #800000 #E0E0E0 #E0E0E0 #800000; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <Label text="Applications" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblTotalApplications" text="0" textFill="#212529">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <!-- Pending -->
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #FFC107 #E0E0E0 #E0E0E0 #FFC107; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <Label text="Pending" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblPendingApplications" text="0" textFill="#FFC107">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <!-- Approved -->
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #28A745 #E0E0E0 #E0E0E0 #28A745; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <Label text="Approved" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblApprovedApplications" text="0" textFill="#28A745">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+                <!-- DETAILS SECTION -->
+                <HBox spacing="25.0">
+                    <children>
+
+                        <!-- PERSONAL INFORMATION CARD -->
+                        <VBox spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #800000; -fx-border-width: 0 0 0 5;" HBox.hgrow="ALWAYS">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+                            <children>
+                                <Label text="Personal Information" textFill="#212529">
+                                    <font><Font name="System Bold" size="18.0" /></font>
+                                </Label>
+                                <Separator />
+
+                                <VBox spacing="15.0">
+                                    <children>
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Full Name" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                <TextField fx:id="txtFullName" promptText="Juan Dela Cruz" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                            </children>
+                                        </VBox>
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Email Address" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                        <TextField fx:id="txtEmail" promptText="student@email.com" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Learner Reference Number (LRN)" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                        <TextField fx:id="txtLRN" promptText="123456789012" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="New Password (leave blank to keep current)" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                <PasswordField fx:id="txtPassword" promptText="••••••••" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+
+                                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                    <children>
+                                        <Button fx:id="btnCancel" onMouseClicked="#handleCancel" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: transparent; -fx-border-color: #800000; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #800000; -fx-cursor: hand;" text="Cancel">
+                                            <font><Font name="System Bold" size="13.0" /></font>
+                                        </Button>
+                                        <Button fx:id="btnSave" onMouseClicked="#handleSaveChanges" prefHeight="40.0" prefWidth="140.0" style="-fx-background-color: #800000; -fx-background-radius: 8; -fx-text-fill: white; -fx-cursor: hand;" text="Save Changes">
+                                            <font><Font name="System Bold" size="13.0" /></font>
+                                        </Button>
+                                    </children>
+                                </HBox>
+
+                                <Label fx:id="lblStatusMessage" text="" textFill="#27ae60" visible="false">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <!-- DOCUMENTS CARD -->
+                        <VBox prefWidth="420.0" spacing="20.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 15;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+                            <children>
+                                <Label text="My Documents" textFill="#212529">
+                                    <font><Font name="System Bold" size="18.0" /></font>
+                                </Label>
+                                <Separator />
+
+                                <!-- DOCUMENTS TABLE -->
+                                <TableView fx:id="tableDocuments" prefHeight="200.0" style="-fx-background-radius: 10;">
+                                    <columns>
+                                        <TableColumn fx:id="colDocName" prefWidth="160.0" text="Document" />
+                                        <TableColumn fx:id="colDocType" prefWidth="130.0" text="Type" />
+                                        <TableColumn fx:id="colDocStatus" prefWidth="90.0" text="Status" />
+                                    </columns>
+                                    <placeholder>
+                                        <Label text="No documents uploaded yet." textFill="#bdc3c7" />
+                                    </placeholder>
+                                </TableView>
+
+                                <Separator />
+
+                                <!-- UPLOAD SECTION -->
+                                <Label text="Upload New Document" textFill="#212529">
+                                    <font><Font name="System Bold" size="14.0" /></font>
+                                </Label>
+
+                                <VBox spacing="10.0">
+                                    <children>
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Document Type" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                <ComboBox fx:id="comboDocType" prefWidth="370.0" style="-fx-background-radius: 8; -fx-border-color: #E0E0E0; -fx-border-radius: 8;" />
+                                            </children>
+                                        </VBox>
+
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Select File (PDF, JPG, PNG, DOCX)" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                                                    <children>
+                                                        <Button onMouseClicked="#handleBrowseFile" prefHeight="38.0" prefWidth="120.0"
+                                                                style="-fx-background-color: #495057; -fx-background-radius: 8; -fx-text-fill: white; -fx-cursor: hand;" text="Browse File">
+                                                            <font><Font name="System Bold" size="12.0" /></font>
+                                                        </Button>
+                                                        <Label fx:id="lblSelectedFile" text="No file selected" textFill="#6C757D">
+                                                            <font><Font size="12.0" /></font>
+                                                        </Label>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+
+                                        <Button fx:id="btnUploadConfirm" onMouseClicked="#handleUploadDocument"
+                                                prefHeight="40.0" prefWidth="200.0"
+                                                style="-fx-background-color: #FFD700; -fx-background-radius: 8; -fx-text-fill: #212529; -fx-cursor: hand;"
+                                                text="⬆ Upload Document">
+                                            <font><Font name="System Bold" size="13.0" /></font>
+                                        </Button>
+                                    </children>
+                                </VBox>
+
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

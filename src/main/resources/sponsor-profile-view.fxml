@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent; -fx-background: #F8F9FA;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.SponsorProfileController">
+    <content>
+        <VBox spacing="30.0" style="-fx-padding: 40;">
+            <children>
+
+                <!-- PAGE TITLE -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Sponsor Profile" textFill="#212529">
+                            <font><Font name="System Bold" size="32.0" /></font>
+                        </Label>
+                        <Label text="Manage your organization details and scholarship offerings." textFill="#6C757D">
+                            <font><Font size="16.0" /></font>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <!-- PROFILE CARD -->
+                <HBox alignment="CENTER_LEFT" spacing="30.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 15;">
+                    <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                    <padding><Insets bottom="30.0" left="30.0" right="30.0" top="30.0" /></padding>
+                    <children>
+
+                        <!-- AVATAR using StackPane so initials sit inside the circle -->
+                        <VBox alignment="CENTER" spacing="12.0">
+                            <children>
+                                <StackPane prefWidth="100.0" prefHeight="100.0">
+                                    <children>
+                                        <Circle fill="#FFD700" radius="50.0" stroke="#800000" strokeWidth="3.0" />
+                                        <Label fx:id="lblAvatarInitials" text="??" textFill="#212529">
+                                            <font><Font name="System Bold" size="28.0" /></font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+                                <Label text="SPONSOR" textFill="#212529" style="-fx-background-color: #FFD700; -fx-background-radius: 20; -fx-padding: 4 14 4 14;">
+                                    <font><Font name="System Bold" size="11.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <Separator orientation="VERTICAL" prefHeight="100.0" style="-fx-opacity: 0.4;" />
+
+                        <!-- NAME & ID -->
+                        <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label fx:id="lblOrgName" text="Loading..." textFill="#212529">
+                                    <font><Font name="System Bold" size="26.0" /></font>
+                                </Label>
+                                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="User ID:" textFill="#6C757D"><font><Font size="13.0" /></font></Label>
+                                        <Label fx:id="lblUserID" text="—" textFill="#800000"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                    </children>
+                                </HBox>
+                                <HBox spacing="8.0" alignment="CENTER_LEFT">
+                                    <children>
+                                        <Label text="Active Scholarships:" textFill="#6C757D"><font><Font size="13.0" /></font></Label>
+                                        <Label fx:id="lblActiveScholarships" text="0" textFill="#27ae60"><font><Font name="System Bold" size="13.0" /></font></Label>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- DETAILS SECTION -->
+                <HBox spacing="25.0">
+                    <children>
+
+                        <!-- ORGANIZATION DETAILS CARD -->
+                        <VBox spacing="20.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #FFD700; -fx-border-width: 0 0 0 5;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+                            <children>
+                                <Label text="Organization Details" textFill="#212529">
+                                    <font><Font name="System Bold" size="18.0" /></font>
+                                </Label>
+                                <Separator />
+
+                                <VBox spacing="15.0">
+                                    <children>
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Organization / Company Name" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                <TextField fx:id="txtOrgName" promptText="e.g., Global Tech Solutions" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                            </children>
+                                        </VBox>
+
+                                        <HBox spacing="15.0">
+                                            <children>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Contact Email" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                        <TextField fx:id="txtEmail" promptText="sponsor@company.com" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                                    </children>
+                                                </VBox>
+                                                <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                                                    <children>
+                                                        <Label text="Location" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                        <TextField fx:id="txtLocation" promptText="e.g., Cebu City" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                                    </children>
+                                                </VBox>
+                                            </children>
+                                        </HBox>
+
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="Description / Mission" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                <TextArea fx:id="txtDescription" prefRowCount="4" promptText="Briefly describe your organization and its advocacy..." wrapText="true"
+                                                          style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                            </children>
+                                        </VBox>
+
+                                        <VBox spacing="5.0">
+                                            <children>
+                                                <Label text="New Password (leave blank to keep current)" textFill="#6C757D"><font><Font name="System Bold" size="12.0" /></font></Label>
+                                                <PasswordField fx:id="txtPassword" promptText="••••••••" style="-fx-background-radius: 10; -fx-padding: 12; -fx-background-color: #FAFAFA; -fx-border-color: #E0E0E0; -fx-border-radius: 10;" />
+                                            </children>
+                                        </VBox>
+                                    </children>
+                                </VBox>
+
+                                <HBox alignment="CENTER_RIGHT" spacing="10.0">
+                                    <children>
+                                        <Button onMouseClicked="#handleCancel" text="Cancel" prefHeight="40.0" prefWidth="100.0"
+                                                style="-fx-background-color: transparent; -fx-border-color: #800000; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #800000; -fx-cursor: hand;">
+                                            <font><Font name="System Bold" size="13.0" /></font>
+                                        </Button>
+                                        <Button onMouseClicked="#handleSaveChanges" text="Save Changes" prefHeight="40.0" prefWidth="140.0"
+                                                style="-fx-background-color: #800000; -fx-background-radius: 8; -fx-text-fill: white; -fx-cursor: hand;">
+                                            <font><Font name="System Bold" size="13.0" /></font>
+                                        </Button>
+                                    </children>
+                                </HBox>
+
+                                <Label fx:id="lblStatusMessage" text="" textFill="#27ae60" visible="false">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <!-- SCHOLARSHIPS OFFERED CARD -->
+                        <VBox spacing="20.0" prefWidth="400.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 15;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <padding><Insets bottom="25.0" left="25.0" right="25.0" top="25.0" /></padding>
+                            <children>
+                                <Label text="Scholarships Offered" textFill="#212529">
+                                    <font><Font name="System Bold" size="18.0" /></font>
+                                </Label>
+                                <Separator />
+
+                                <TableView fx:id="tableScholarships" prefHeight="280.0" style="-fx-background-radius: 10;">
+                                    <columns>
+                                        <TableColumn fx:id="colScholarshipName" prefWidth="170.0" text="Scholarship" />
+                                        <TableColumn fx:id="colMinGrade" prefWidth="90.0" text="Min. Grade" />
+                                        <TableColumn fx:id="colStatus" prefWidth="90.0" text="Status" />
+                                    </columns>
+                                    <placeholder>
+                                        <Label text="No scholarships posted yet." textFill="#bdc3c7" />
+                                    </placeholder>
+                                </TableView>
+
+                                <Button onMouseClicked="#handleAddScholarship" text="+ Add Scholarship" prefHeight="40.0" prefWidth="200.0"
+                                        style="-fx-background-color: #FFD700; -fx-background-radius: 8; -fx-text-fill: #212529; -fx-cursor: hand;">
+                                    <font><Font name="System Bold" size="13.0" /></font>
+                                </Button>
+                            </children>
+                        </VBox>
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
