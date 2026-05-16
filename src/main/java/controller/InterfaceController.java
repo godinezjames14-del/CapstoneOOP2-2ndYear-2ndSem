@@ -27,13 +27,15 @@ public class InterfaceController {
 
     // Admin-only sidebar button
     @FXML private Button btnAdminPanel;
+    @FXML private Label labelRole;
+    @FXML private Button btnDynamicAction;
 
     private int currentUserID;
     private String currentUserRole;
 
     @FXML
     public void initialize() {
-        // Default; role-specific home set in setUserData
+        loadView("/student-dashboard.fxml");
     }
 
     public void setUserData(String name, int userID, String role) {
@@ -57,6 +59,11 @@ public class InterfaceController {
         } else {
             loadView("/student-dashboard.fxml");
         }
+        labelRole.setText(role);
+        if (name != null && !name.isEmpty()) {
+            labelUserName.setText(name.toUpperCase());
+        }
+        configureDynamicTabs();
     }
 
     public void setUserData(String name) {

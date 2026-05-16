@@ -96,6 +96,7 @@ public class ScholarshipListController {
 
     private void navigateToScholarshipTab(int scholarshipId) {
         try {
+            // FIXED PATH: Pointing exactly to your working layout name
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/scholarship-tab.fxml"));
             Parent root = loader.load();
 
