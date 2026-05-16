@@ -17,7 +17,7 @@ import java.net.URL;
 public class InterfaceController {
 
     @FXML private Label labelUserName;
-    @FXML private Label labelUserRole;
+    @FXML private Label labelUserRole; // Unified: We will use this single label for the header role
     @FXML private BorderPane mainPane;
     @FXML private Button btnDashboard;
     @FXML private Button btnScholarships;
@@ -27,31 +27,34 @@ public class InterfaceController {
 
     // Admin-only sidebar button
     @FXML private Button btnAdminPanel;
-    @FXML private Label labelRole;
-    @FXML private Button btnDynamicAction;
 
     private int currentUserID;
     private String currentUserRole;
 
     @FXML
     public void initialize() {
-        loadView("/student-dashboard.fxml");
+        // Leave central area with default "Select a tab to begin" layout state
+        // until userData payload passes a specific role filter
     }
 
     public void setUserData(String name, int userID, String role) {
         this.currentUserID = userID;
         this.currentUserRole = role;
 
+        // 1. Safely update user profile display headers
         if (name != null && !name.isEmpty()) {
             labelUserName.setText(name.toUpperCase());
         }
-        if (labelUserRole != null) {
+
+        if (labelUserRole != null && role != null) {
             String roleCap = role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase();
             labelUserRole.setText(roleCap);
         }
 
+        // 2. Hide or show custom buttons dynamically based on user privilege levels
         configureSidebarForRole(role);
 
+        // 3. Router logic: Load the correct inner operational center view
         if ("SPONSOR".equalsIgnoreCase(role)) {
             loadSponsorDashboard();
         } else if ("ADMIN".equalsIgnoreCase(role)) {
@@ -59,11 +62,6 @@ public class InterfaceController {
         } else {
             loadView("/student-dashboard.fxml");
         }
-        labelRole.setText(role);
-        if (name != null && !name.isEmpty()) {
-            labelUserName.setText(name.toUpperCase());
-        }
-        configureDynamicTabs();
     }
 
     public void setUserData(String name) {
@@ -156,10 +154,10 @@ public class InterfaceController {
 
             if ("SPONSOR".equalsIgnoreCase(currentUserRole)) {
                 SponsorProfileController ctrl = loader.getController();
-                ctrl.setUserID(currentUserID);
+                if (ctrl != null) ctrl.setUserID(currentUserID);
             } else {
                 StudentProfileController ctrl = loader.getController();
-                ctrl.setUserID(currentUserID);
+                if (ctrl != null) ctrl.setUserID(currentUserID);
             }
 
             if (view instanceof ScrollPane sp) { sp.setFitToWidth(true); sp.setFitToHeight(false); }
@@ -170,7 +168,6 @@ public class InterfaceController {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    /** NEW: Admin panel button handler */
     @FXML
     private void showAdminPanel(MouseEvent event) {
         loadAdminDashboard();
@@ -182,7 +179,7 @@ public class InterfaceController {
     private void loadAdminDashboard() {
         try {
             URL loc = getClass().getResource("/admin-dashboard.fxml");
-            if (loc == null) { System.err.println("admin-interface.fxml not found"); return; }
+            if (loc == null) { System.err.println("admin-dashboard.fxml not found"); return; }
             FXMLLoader loader = new FXMLLoader(loc);
             Parent view = loader.load();
 
@@ -195,7 +192,7 @@ public class InterfaceController {
     private void loadSponsorDashboard() {
         try {
             URL loc = getClass().getResource("/sponsor-dashboard.fxml");
-            if (loc == null) { System.err.println("sponsor-interface.fxml not found"); return; }
+            if (loc == null) { System.err.println("sponsor-dashboard.fxml not found"); return; }
             FXMLLoader loader = new FXMLLoader(loc);
             Parent view = loader.load();
 
@@ -248,7 +245,6 @@ public class InterfaceController {
     @FXML
     private void handleLogout(MouseEvent event) {
         try {
-            // Clear session file
             java.io.File session = new java.io.File("session.ser");
             if (session.exists()) session.delete();
 

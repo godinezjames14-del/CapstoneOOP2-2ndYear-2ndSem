@@ -11,7 +11,6 @@
         <VBox spacing="30.0" style="-fx-padding: 40;">
             <children>
 
-                <!-- PAGE HEADER -->
                 <VBox spacing="5.0">
                     <children>
                         <Label text="My Applications" textFill="#212529">
@@ -23,45 +22,52 @@
                     </children>
                 </VBox>
 
-                <!-- STATS ROW -->
                 <HBox spacing="20.0">
                     <children>
-                        <VBox prefHeight="110.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #800000; -fx-border-width: 0 0 0 5;">
-                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #800000 #E0E0E0 #E0E0E0 #800000; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                             <children>
-                                <Label text="Total Applied" textFill="#6C757D" />
-                                <Label fx:id="lblTotalApplied" text="0" textFill="#800000">
-                                    <font><Font name="System Bold" size="30.0" /></font>
+                                <Label text="Total Applied" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblTotalApplied" text="0" textFill="#212529">
+                                    <font><Font name="System Bold" size="36.0" /></font>
                                 </Label>
                             </children>
-                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                         </VBox>
 
-                        <VBox prefHeight="110.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #FFD700; -fx-border-width: 0 0 0 5;">
-                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #FFC107 #E0E0E0 #E0E0E0 #FFC107; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                             <children>
-                                <Label text="Pending" textFill="#6C757D" />
-                                <Label fx:id="lblPending" text="0" textFill="#856404">
-                                    <font><Font name="System Bold" size="30.0" /></font>
+                                <Label text="Pending" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblPending" text="0" textFill="#FFC107">
+                                    <font><Font name="System Bold" size="36.0" /></font>
                                 </Label>
                             </children>
-                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                         </VBox>
 
-                        <VBox prefHeight="110.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #28a745; -fx-border-width: 0 0 0 5;">
-                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #28A745 #E0E0E0 #E0E0E0 #28A745; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                             <children>
-                                <Label text="Approved" textFill="#6C757D" />
-                                <Label fx:id="lblApproved" text="0" textFill="#155724">
-                                    <font><Font name="System Bold" size="30.0" /></font>
+                                <Label text="Approved" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblApproved" text="0" textFill="#28A745">
+                                    <font><Font name="System Bold" size="36.0" /></font>
                                 </Label>
                             </children>
-                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
                         </VBox>
                     </children>
                 </HBox>
 
-                <!-- APPLICATIONS TABLE -->
                 <VBox spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 15; -fx-padding: 30;">
                     <effect><DropShadow color="#0000001a" radius="10" /></effect>
                     <children>
