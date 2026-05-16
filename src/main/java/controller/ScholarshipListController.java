@@ -31,6 +31,7 @@ public class ScholarshipListController {
     @FXML private TableColumn<Scholarship, Void> colAction;
 
     private ObservableList<Scholarship> masterData = FXCollections.observableArrayList();
+    private int currentStudentID; // passed through for apply tracking
 
     @FXML
     public void initialize() {
@@ -58,6 +59,11 @@ public class ScholarshipListController {
         tableScholarships.setItems(filteredData);
     }
 
+    /** Called from DashboardController so studentID flows into the tab view */
+    public void setStudentID(int studentID) {
+        this.currentStudentID = studentID;
+    }
+
     private void createActionColumnButtons() {
         Callback<TableColumn<Scholarship, Void>, TableCell<Scholarship, Void>> cellFactory = new Callback<>() {
             @Override
@@ -80,11 +86,7 @@ public class ScholarshipListController {
                     @Override
                     protected void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            setGraphic(btnView);
-                        }
+                        setGraphic(empty ? null : btnView);
                     }
                 };
             }
@@ -94,24 +96,22 @@ public class ScholarshipListController {
 
     private void navigateToScholarshipTab(int scholarshipId) {
         try {
-            // FIXED PATH: Pointing exactly to your working layout name
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scholarship-tab-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scholarship-tab.fxml"));
             Parent root = loader.load();
 
             ScholarshipTabController controller = loader.getController();
             if (controller != null) {
-                // Find your global container layout container from the scene tree stack
                 BorderPane shellPane = (BorderPane) tableScholarships.getScene().lookup("#mainPane");
 
                 if (shellPane != null) {
-                    // Populate data, then set inner center panel workspace dynamically
+                    // Pass student ID so Apply Now can track who is applying
+                    controller.setStudentID(currentStudentID);
                     controller.loadScholarshipData(shellPane, root, scholarshipId);
                 } else {
-                    // Fallback to safety if layout context changes unexpectedly
                     System.err.println("⚠️ Warning: mainPane not found via scene lookup.");
                 }
             } else {
-                System.err.println("❌ Error: fx:controller attribute missing inside scholarship-tab-view.fxml");
+                System.err.println("❌ Error: fx:controller attribute missing inside scholarship-tab.fxml");
             }
 
         } catch (IOException e) {

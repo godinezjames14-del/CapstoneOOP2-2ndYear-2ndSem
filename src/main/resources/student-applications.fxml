@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.effect.DropShadow?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #F8F9FA;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.StudentApplicationsController">
+    <content>
+        <VBox spacing="30.0" style="-fx-padding: 40;">
+            <children>
+
+                <!-- PAGE HEADER -->
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="My Applications" textFill="#212529">
+                            <font><Font name="System Bold" size="32.0" /></font>
+                        </Label>
+                        <Label text="Track the status of your scholarship applications." textFill="#6C757D">
+                            <font><Font size="16.0" /></font>
+                        </Label>
+                    </children>
+                </VBox>
+
+                <!-- STATS ROW -->
+                <HBox spacing="20.0">
+                    <children>
+                        <VBox prefHeight="110.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #800000; -fx-border-width: 0 0 0 5;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <children>
+                                <Label text="Total Applied" textFill="#6C757D" />
+                                <Label fx:id="lblTotalApplied" text="0" textFill="#800000">
+                                    <font><Font name="System Bold" size="30.0" /></font>
+                                </Label>
+                            </children>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                        </VBox>
+
+                        <VBox prefHeight="110.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #FFD700; -fx-border-width: 0 0 0 5;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <children>
+                                <Label text="Pending" textFill="#6C757D" />
+                                <Label fx:id="lblPending" text="0" textFill="#856404">
+                                    <font><Font name="System Bold" size="30.0" /></font>
+                                </Label>
+                            </children>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                        </VBox>
+
+                        <VBox prefHeight="110.0" HBox.hgrow="ALWAYS" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #28a745; -fx-border-width: 0 0 0 5;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <children>
+                                <Label text="Approved" textFill="#6C757D" />
+                                <Label fx:id="lblApproved" text="0" textFill="#155724">
+                                    <font><Font name="System Bold" size="30.0" /></font>
+                                </Label>
+                            </children>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <!-- APPLICATIONS TABLE -->
+                <VBox spacing="15.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #E0E0E0; -fx-border-radius: 15; -fx-padding: 30;">
+                    <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                    <children>
+                        <Label text="Application History" textFill="#212529">
+                            <font><Font name="System Bold" size="20.0" /></font>
+                        </Label>
+
+                        <TableView fx:id="tableApplications" prefHeight="350.0" style="-fx-background-radius: 10;">
+                            <columnResizePolicy>
+                                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                            </columnResizePolicy>
+                            <columns>
+                                <TableColumn fx:id="colAppDate"         prefWidth="160.0" text="Applied Date" />
+                                <TableColumn fx:id="colAppScholarship"  prefWidth="280.0" text="Scholarship" />
+                                <TableColumn fx:id="colAppSponsor"      prefWidth="200.0" text="Sponsor" />
+                                <TableColumn fx:id="colAppStatus"       prefWidth="140.0" text="Status" style="-fx-alignment: CENTER;" />
+                            </columns>
+                            <placeholder>
+                                <Label text="You have not applied for any scholarships yet." textFill="#bdc3c7" />
+                            </placeholder>
+                        </TableView>
+                    </children>
+                </VBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>
