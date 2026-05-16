@@ -16,6 +16,5 @@ public class mySQLConnection {
         } catch (ClassNotFoundException e) {
             throw new SQLException("JDBC Driver not found", e);
         }
-        // Removing any 'return null' here ensures "conn" is never null in your controller
     }
 }
