@@ -17,10 +17,16 @@ import java.net.URL;
 public class InterfaceController {
 
     @FXML private Label labelUserName;
+    @FXML private Label labelUserRole;
     @FXML private BorderPane mainPane;
     @FXML private Button btnDashboard;
     @FXML private Button btnScholarships;
     @FXML private Button btnProfile;
+    @FXML private Button btnDonate;
+    @FXML private Button btnMyApplications;
+
+    // Admin-only sidebar button
+    @FXML private Button btnAdminPanel;
     @FXML private Label labelRole;
     @FXML private Button btnDynamicAction;
 
@@ -35,6 +41,24 @@ public class InterfaceController {
     public void setUserData(String name, int userID, String role) {
         this.currentUserID = userID;
         this.currentUserRole = role;
+
+        if (name != null && !name.isEmpty()) {
+            labelUserName.setText(name.toUpperCase());
+        }
+        if (labelUserRole != null) {
+            String roleCap = role.substring(0, 1).toUpperCase() + role.substring(1).toLowerCase();
+            labelUserRole.setText(roleCap);
+        }
+
+        configureSidebarForRole(role);
+
+        if ("SPONSOR".equalsIgnoreCase(role)) {
+            loadSponsorDashboard();
+        } else if ("ADMIN".equalsIgnoreCase(role)) {
+            loadAdminDashboard();
+        } else {
+            loadView("/student-dashboard.fxml");
+        }
         labelRole.setText(role);
         if (name != null && !name.isEmpty()) {
             labelUserName.setText(name.toUpperCase());
@@ -48,16 +72,73 @@ public class InterfaceController {
         }
     }
 
+    private void configureSidebarForRole(String role) {
+        boolean isSponsor = "SPONSOR".equalsIgnoreCase(role);
+        boolean isAdmin   = "ADMIN".equalsIgnoreCase(role);
+        boolean isStudent = "STUDENT".equalsIgnoreCase(role);
+
+        // Donate – sponsor only
+        setVisible(btnDonate, isSponsor);
+
+        // Scholarships & My Applications – student only
+        setVisible(btnScholarships, isStudent);
+        setVisible(btnMyApplications, isStudent);
+
+        // Profile – student & sponsor only (admins manage users differently)
+        setVisible(btnProfile, !isAdmin);
+
+        // Admin Panel – admin only
+        setVisible(btnAdminPanel, isAdmin);
+    }
+
+    private void setVisible(Button btn, boolean visible) {
+        if (btn != null) {
+            btn.setVisible(visible);
+            btn.setManaged(visible);
+        }
+    }
+
+    // ── Sidebar handlers ─────────────────────────────────────────────────────
+
     @FXML
     private void showHome(MouseEvent event) {
-        loadView("/student-dashboard.fxml");
-        updateButtonStyles(btnDashboard, btnScholarships, btnProfile);
+        if ("SPONSOR".equalsIgnoreCase(currentUserRole)) {
+            loadSponsorDashboard();
+        } else if ("ADMIN".equalsIgnoreCase(currentUserRole)) {
+            loadAdminDashboard();
+        } else {
+            loadView("/student-dashboard.fxml");
+        }
+        updateButtonStyles(btnDashboard, btnScholarships, btnProfile, btnDonate, btnMyApplications, btnAdminPanel);
     }
 
     @FXML
     private void showScholarshipList(MouseEvent event) {
-        loadView("/scholarship-list.fxml");
-        updateButtonStyles(btnScholarships, btnDashboard, btnProfile);
+        try {
+            URL loc = getClass().getResource("/scholarship-list.fxml");
+            if (loc == null) { System.err.println("scholarship-list.fxml not found"); return; }
+            FXMLLoader loader = new FXMLLoader(loc);
+            Parent view = loader.load();
+
+            ScholarshipListController ctrl = loader.getController();
+            if (ctrl != null) ctrl.setStudentID(currentUserID);
+
+            BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
+            mainPane.setCenter(view);
+        } catch (IOException e) { e.printStackTrace(); }
+        updateButtonStyles(btnScholarships, btnDashboard, btnProfile, btnDonate, btnMyApplications, btnAdminPanel);
+    }
+
+    @FXML
+    private void showDonate(MouseEvent event) {
+        loadSponsorDashboard();
+        updateButtonStyles(btnDonate, btnDashboard, btnScholarships, btnProfile, btnMyApplications, btnAdminPanel);
+    }
+
+    @FXML
+    private void showMyApplications(MouseEvent event) {
+        loadStudentApplications();
+        updateButtonStyles(btnMyApplications, btnDashboard, btnScholarships, btnProfile, btnDonate, btnAdminPanel);
     }
 
     @FXML
@@ -68,10 +149,7 @@ public class InterfaceController {
                     : "/student-profile.fxml";
 
             URL loc = getClass().getResource(fxmlPath);
-            if (loc == null) {
-                System.err.println("Profile FXML not found: " + fxmlPath);
-                return;
-            }
+            if (loc == null) { System.err.println("Profile FXML not found: " + fxmlPath); return; }
 
             FXMLLoader loader = new FXMLLoader(loc);
             Parent view = loader.load();
@@ -84,127 +162,101 @@ public class InterfaceController {
                 ctrl.setUserID(currentUserID);
             }
 
-            if (view instanceof ScrollPane sp) {
-                sp.setFitToWidth(true);
-                sp.setFitToHeight(false);
-            }
-
+            if (view instanceof ScrollPane sp) { sp.setFitToWidth(true); sp.setFitToHeight(false); }
             BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
             mainPane.setCenter(view);
-            updateButtonStyles(btnProfile, btnDashboard, btnScholarships);
+            updateButtonStyles(btnProfile, btnDashboard, btnScholarships, btnDonate, btnMyApplications, btnAdminPanel);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
-    private void updateButtonStyles(Button active, Button... inactive) {
-        active.setStyle("-fx-background-color: #800000; -fx-background-radius: 10; -fx-text-fill: white; -fx-cursor: hand;");
-        for (Button b : inactive) {
-            if (b != null) {
-                b.setStyle("-fx-background-color: transparent; -fx-text-fill: #495057; -fx-cursor: hand;");
-            }
-        }
+    /** NEW: Admin panel button handler */
+    @FXML
+    private void showAdminPanel(MouseEvent event) {
+        loadAdminDashboard();
+        updateButtonStyles(btnAdminPanel, btnDashboard, btnScholarships, btnProfile, btnDonate, btnMyApplications);
+    }
+
+    // ── Loaders ───────────────────────────────────────────────────────────────
+
+    private void loadAdminDashboard() {
+        try {
+            URL loc = getClass().getResource("/admin-dashboard.fxml");
+            if (loc == null) { System.err.println("admin-interface.fxml not found"); return; }
+            FXMLLoader loader = new FXMLLoader(loc);
+            Parent view = loader.load();
+
+            if (view instanceof ScrollPane sp) { sp.setFitToWidth(true); sp.setFitToHeight(false); }
+            BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
+            mainPane.setCenter(view);
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    private void loadSponsorDashboard() {
+        try {
+            URL loc = getClass().getResource("/sponsor-dashboard.fxml");
+            if (loc == null) { System.err.println("sponsor-interface.fxml not found"); return; }
+            FXMLLoader loader = new FXMLLoader(loc);
+            Parent view = loader.load();
+
+            SponsorDashboardController ctrl = loader.getController();
+            if (ctrl != null) ctrl.setSponsorUserID(currentUserID);
+
+            if (view instanceof ScrollPane sp) { sp.setFitToWidth(true); sp.setFitToHeight(false); }
+            BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
+            mainPane.setCenter(view);
+        } catch (IOException e) { e.printStackTrace(); }
+    }
+
+    private void loadStudentApplications() {
+        try {
+            URL loc = getClass().getResource("/student-applications.fxml");
+            if (loc == null) { System.err.println("student-applications.fxml not found"); return; }
+            FXMLLoader loader = new FXMLLoader(loc);
+            Parent view = loader.load();
+
+            StudentApplicationsController ctrl = loader.getController();
+            if (ctrl != null) ctrl.setStudentID(currentUserID);
+
+            if (view instanceof ScrollPane sp) { sp.setFitToWidth(true); sp.setFitToHeight(false); }
+            BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
+            mainPane.setCenter(view);
+        } catch (IOException e) { e.printStackTrace(); }
     }
 
     private void loadView(String fxmlPath) {
         try {
             URL loc = getClass().getResource(fxmlPath);
-            if (loc == null) {
-                System.err.println("Resource not found: " + fxmlPath);
-                return;
-            }
+            if (loc == null) { System.err.println("Resource not found: " + fxmlPath); return; }
             Parent view = FXMLLoader.load(loc);
-
-            if (view instanceof ScrollPane sp) {
-                sp.setFitToWidth(true);
-                sp.setFitToHeight(false);
-            }
-
+            if (view instanceof ScrollPane sp) { sp.setFitToWidth(true); sp.setFitToHeight(false); }
             BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
             mainPane.setCenter(view);
+        } catch (IOException e) { e.printStackTrace(); }
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    // ── Style helpers ─────────────────────────────────────────────────────────
+
+    private void updateButtonStyles(Button active, Button... inactive) {
+        if (active != null)
+            active.setStyle("-fx-background-color: #800000; -fx-background-radius: 10; -fx-text-fill: white; -fx-cursor: hand;");
+        for (Button b : inactive)
+            if (b != null)
+                b.setStyle("-fx-background-color: transparent; -fx-text-fill: #495057; -fx-cursor: hand;");
     }
 
     @FXML
     private void handleLogout(MouseEvent event) {
         try {
+            // Clear session file
+            java.io.File session = new java.io.File("session.ser");
+            if (session.exists()) session.delete();
+
             Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.centerOnScreen();
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) { e.printStackTrace(); }
     }
-
-    private void configureDynamicTabs() {
-        if ("SPONSOR".equalsIgnoreCase(currentUserRole)) {
-            btnDynamicAction.setText("💰 Add Funds");
-        } else if ("ADMIN".equalsIgnoreCase(currentUserRole)) { // Assuming "MANAGE SYSTEM" is for Admin roles
-            btnDynamicAction.setText("⚙️ Manage System");
-        } else {
-            btnDynamicAction.setText("📄 My Applications");
-        }
-    }
-
-    @FXML
-    private void handleDynamicActionClick(MouseEvent event) {
-        String fxmlPath = "";
-
-        // 1. Determine which individual view path target to resolve
-        if ("SPONSOR".equalsIgnoreCase(currentUserRole)) {
-            fxmlPath = "/add-funds-view.fxml";
-        } else if ("ADMIN".equalsIgnoreCase(currentUserRole)) {
-            fxmlPath = "/manage-system-view.fxml";
-        } else {
-            fxmlPath = "/my-applications-view.fxml";
-        }
-
-        // 2. Load the view dynamically into your main central workspace container pane
-        try {
-            URL loc = getClass().getResource(fxmlPath);
-            if (loc == null) {
-                System.err.println("Target view FXML not found: " + fxmlPath);
-                return;
-            }
-
-            FXMLLoader loader = new FXMLLoader(loc);
-            Parent view = loader.load();
-
-            // 3. Optional: Pass your currentUserID to the target controller if they need it
-            if ("SPONSOR".equalsIgnoreCase(currentUserRole)) {
-//                AddFundsController ctrl = loader.getController();
-//                ctrl.setUserID(currentUserID); // Pass data directly to your Add Funds handler
-            } else if ("ADMIN".equalsIgnoreCase(currentUserRole)) {
-//                ManageSystemController ctrl = loader.getController();
-                // ctrl.setupAdminAccess(currentUserID);
-            } else {
-//                MyApplicationsController ctrl = loader.getController();
-//                ctrl.setStudentUserID(currentUserID);
-            }
-
-            // 4. Clean up ScrollPane width matching
-            if (view instanceof ScrollPane sp) {
-                sp.setFitToWidth(true);
-                sp.setFitToHeight(false);
-            }
-
-            BorderPane.setAlignment(view, javafx.geometry.Pos.TOP_LEFT);
-            mainPane.setCenter(view); // Update dashboard workspace frame view area
-
-            // Update button highlight layout styling rules
-            updateButtonStyles(btnDynamicAction, btnDashboard, btnScholarships, btnProfile);
-
-        } catch (IOException e) {
-            System.err.println("Error rendering dynamic route selection view pane:");
-            e.printStackTrace();
-        }
-    }
-
-
 }
