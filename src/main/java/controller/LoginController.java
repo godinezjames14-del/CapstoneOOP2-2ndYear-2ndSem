@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 
-public class MainMenuController {
+public class LoginController {
 
     @FXML private TextField txtEmail;
     @FXML private PasswordField txtPassword;
@@ -54,11 +54,11 @@ public class MainMenuController {
 
     private void navigateToDashboard(MouseEvent event, User user) {
         try {
-            URL fxmlLocation = getClass().getResource("/dashboard-view.fxml");
+            URL fxmlLocation = getClass().getResource("/interface.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
             Parent root = loader.load();
 
-            DashboardController dashboard = loader.getController();
+            InterfaceController dashboard = loader.getController();
             if (dashboard != null) {
                 dashboard.setUserData(user.getName(), user.getUserID(), user.getRole());
             }
@@ -76,12 +76,12 @@ public class MainMenuController {
     @FXML
     private void RegisterScreen(MouseEvent event) {
         try {
-            Parent registerRoot = FXMLLoader.load(getClass().getResource("/register-view.fxml"));
+            Parent registerRoot = FXMLLoader.load(getClass().getResource("/register.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(registerRoot));
             stage.show();
         } catch (IOException e) {
-            System.err.println("Error: Could not load register-view.fxml");
+            System.err.println("Error: Could not load register.fxml");
             e.printStackTrace();
         }
     }

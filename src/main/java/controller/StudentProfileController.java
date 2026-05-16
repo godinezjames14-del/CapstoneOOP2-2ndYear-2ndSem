@@ -30,10 +30,7 @@ public class StudentProfileController {
     @FXML private Label lblAvatarInitials;
     @FXML private Label lblStatusMessage;
 
-    // Stats containers
-    @FXML private Label lblTotalApplications;
-    @FXML private Label lblPendingApplications;
-    @FXML private Label lblApprovedApplications;
+
 
     @FXML private TextField txtFullName;
     @FXML private TextField txtEmail;
@@ -80,7 +77,6 @@ public class StudentProfileController {
         this.currentUserID = userID;
         loadProfileFromDB();
         loadDocumentsFromDB();
-        loadApplicationStatsFromDB();
     }
 
     private void loadProfileFromDB() {
@@ -117,29 +113,7 @@ public class StudentProfileController {
         }
     }
 
-    private void loadApplicationStatsFromDB() {
-        String query = "SELECT " +
-                "COUNT(*) AS total, " +
-                "SUM(CASE WHEN status = 'Pending' THEN 1 ELSE 0 END) AS pending, " +
-                "SUM(CASE WHEN status = 'Approved' THEN 1 ELSE 0 END) AS approved " +
-                "FROM applications WHERE studentID = ?";
-        try (Connection conn = mySQLConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
 
-            ps.setInt(1, currentUserID);
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                lblTotalApplications.setText(String.valueOf(rs.getInt("total")));
-                lblPendingApplications.setText(String.valueOf(rs.getInt("pending")));
-                lblApprovedApplications.setText(String.valueOf(rs.getInt("approved")));
-            }
-
-        } catch (Exception e) {
-            System.err.println("Error loading application stats:");
-            e.printStackTrace();
-        }
-    }
 
     private void loadDocumentsFromDB() {
         documentList.clear();

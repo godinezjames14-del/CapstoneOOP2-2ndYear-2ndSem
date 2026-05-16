@@ -86,13 +86,13 @@ public class RegisterController {
     @FXML
     private void MainMenuScreen(MouseEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/mainmenu-view.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {
-            System.err.println("Could not load mainmenu-view.fxml");
+            System.err.println("Could not load login.fxml");
             e.printStackTrace();
         }
     }

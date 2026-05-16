@@ -95,7 +95,7 @@ public class ScholarshipListController {
     private void navigateToScholarshipTab(int scholarshipId) {
         try {
             // FIXED PATH: Pointing exactly to your working layout name
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scholarship-tab-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scholarship-tab.fxml"));
             Parent root = loader.load();
 
             ScholarshipTabController controller = loader.getController();
@@ -111,7 +111,7 @@ public class ScholarshipListController {
                     System.err.println("⚠️ Warning: mainPane not found via scene lookup.");
                 }
             } else {
-                System.err.println("❌ Error: fx:controller attribute missing inside scholarship-tab-view.fxml");
+                System.err.println("❌ Error: fx:controller attribute missing inside scholarship-tab.fxml");
             }
 
         } catch (IOException e) {

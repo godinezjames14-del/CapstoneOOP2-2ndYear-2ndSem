@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-background: #F8F9FA;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.StudentDashboardController">
+    <content>
+        <VBox spacing="30.0" style="-fx-padding: 40;">
+            <children>
+                <VBox spacing="5.0">
+                    <children>
+                        <Label text="Welcome back!" textFill="#212529">
+                            <font><Font name="System Bold" size="32.0" /></font>
+                        </Label>
+                        <Label text="Here is the global platform activity for today." textFill="#6C757D">
+                            <font><Font size="16.0" /></font>
+                        </Label>
+                    </children>
+                </VBox>
+
+
+
+                <!-- STATS CONTAINERS: Applications, Pending, Approved -->
+                <HBox spacing="20.0">
+                    <children>
+
+                        <!-- Applications -->
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #800000 #E0E0E0 #E0E0E0 #800000; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <Label text="Applications" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblTotalApplications" text="0" textFill="#212529">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <!-- Pending -->
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #FFC107 #E0E0E0 #E0E0E0 #FFC107; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <Label text="Pending" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblPendingApplications" text="0" textFill="#FFC107">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                        <!-- Approved -->
+                        <VBox alignment="CENTER_LEFT" spacing="8.0" HBox.hgrow="ALWAYS"
+                              style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-border-color: #28A745 #E0E0E0 #E0E0E0 #28A745; -fx-border-radius: 12; -fx-border-width: 1 1 1 5;">
+                            <effect><DropShadow color="#0000001a" radius="8" /></effect>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                            <children>
+                                <Label text="Approved" textFill="#6C757D">
+                                    <font><Font size="13.0" /></font>
+                                </Label>
+                                <Label fx:id="lblApprovedApplications" text="0" textFill="#28A745">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                        </VBox>
+
+                    </children>
+                </HBox>
+
+                <HBox spacing="25.0">
+                    <children>
+                        <!-- TOTAL SCHOLARSHIPS CARD -->
+                        <VBox prefHeight="120.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #800000; -fx-border-width: 0 0 0 5;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <children>
+                                <Label text="Total Scholarships" textFill="#6C757D" />
+                                <Label fx:id="labelScholar" text="1,240" textFill="#800000">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                        </VBox>
+
+                        <!-- ACTIVE SPONSORS CARD -->
+                        <VBox prefHeight="120.0" prefWidth="300.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 15; -fx-border-color: #FFD700; -fx-border-width: 0 0 0 5;">
+                            <effect><DropShadow color="#0000001a" radius="10" /></effect>
+                            <children>
+                                <Label text="Active Sponsors" textFill="#6C757D" />
+                                <Label fx:id="labelSponsor" text="85" textFill="#212529">
+                                    <font><Font name="System Bold" size="36.0" /></font>
+                                </Label>
+                            </children>
+                            <padding><Insets bottom="20.0" left="20.0" right="20.0" top="20.0" /></padding>
+                        </VBox>
+                    </children>
+                </HBox>
+
+            </children>
+        </VBox>
+    </content>
+</ScrollPane>

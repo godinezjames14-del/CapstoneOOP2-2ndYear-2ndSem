@@ -90,7 +90,7 @@ public class ScholarshipTabController {
 
     private void handleBackAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scholarship-list-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/scholarship-list.fxml"));
             Parent root = loader.load();
 
             // Look up the shell BorderPane wrapper container frame structure dynamically
@@ -100,7 +100,7 @@ public class ScholarshipTabController {
                 mainPane.setCenter(root);
             }
         } catch (Exception e) {
-            System.err.println("Error heading back: Could not find scholarship-list-view.fxml");
+            System.err.println("Error heading back: Could not find scholarship-list.fxml");
             e.printStackTrace();
         }
     }

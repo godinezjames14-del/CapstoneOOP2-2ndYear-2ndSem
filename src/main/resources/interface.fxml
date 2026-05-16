@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.DashboardController">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: #F8F9FA;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controller.InterfaceController">
 
     <!-- HEADER -->
     <top>
@@ -26,7 +33,7 @@
                                 <Label fx:id="labelUserName" text="USER NAME" textFill="WHITE">
                                     <font><Font name="System Bold" size="16.0" /></font>
                                 </Label>
-                                <Label text="Student" textFill="#ffd700">
+                                <Label fx:id="labelRole" text="" textFill="#ffd700">
                                     <font><Font size="12.0" /></font>
                                 </Label>
                             </children>
@@ -43,22 +50,22 @@
     <left>
         <VBox prefWidth="260.0" spacing="10.0" style="-fx-background-color: #FFFFFF; -fx-border-color: #DEE2E6; -fx-border-width: 0 1 0 0;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="btnDashboard" onMouseClicked="#showHome" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #800000; -fx-background-radius: 10; -fx-cursor: hand;" text="🏠 Dashboard" textFill="WHITE">
+                <Button fx:id="btnDashboard" alignment="BASELINE_LEFT" onMouseClicked="#showHome" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: #800000; -fx-background-radius: 10; -fx-cursor: hand;" text="🏠 Dashboard" textFill="WHITE">
                     <font><Font name="System Bold" size="16.0" /></font>
                     <padding><Insets left="20.0" /></padding>
                 </Button>
 
-                <Button fx:id="btnScholarships" onMouseClicked="#showScholarshipList" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="🎓 Scholarships" textFill="#495057">
+                <Button fx:id="btnScholarships" alignment="BASELINE_LEFT" onMouseClicked="#showScholarshipList" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="🎓 Scholarships" textFill="#495057">
                     <font><Font size="16.0" /></font>
                     <padding><Insets left="20.0" /></padding>
                 </Button>
 
-                <Button alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="📄 My Applications" textFill="#495057">
+                <Button fx:id="btnDynamicAction" alignment="BASELINE_LEFT" onMouseClicked="#handleDynamicActionClick" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="📄 My Applications" textFill="#495057">
                     <font><Font size="16.0" /></font>
                     <padding><Insets left="20.0" /></padding>
                 </Button>
 
-                <Button fx:id="btnProfile" onMouseClicked="#showProfile" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="👤 My Profile" textFill="#495057">
+                <Button fx:id="btnProfile" alignment="BASELINE_LEFT" onMouseClicked="#showProfile" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="👤 My Profile" textFill="#495057">
                     <font><Font size="16.0" /></font>
                     <padding><Insets left="20.0" /></padding>
                 </Button>
@@ -68,7 +75,7 @@
 
                 <Separator prefWidth="200.0" />
 
-                <Button onMouseClicked="#handleLogout" alignment="BASELINE_LEFT" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="🚪 Log Out" textFill="#e74c3c">
+                <Button alignment="BASELINE_LEFT" onMouseClicked="#handleLogout" prefHeight="50.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-cursor: hand;" text="🚪 Log Out" textFill="#e74c3c">
                     <font><Font name="System Bold" size="16.0" /></font>
                     <padding><Insets left="20.0" /></padding>
                 </Button>
